@@ -1,0 +1,30 @@
+---
+title: "Data Acquisition and Management Week 1 Assignment"
+author: "Chun San Yip"
+date: "2019/02/02" 
+output: html_document
+---
+
+Overview:
+The Raptor rating which is updated daily, use play-by-play and player-tracking data to calculate each player’s individual plus-minus measurements and wins above replacement, which accounts for playing time. It is a target for who is the best player in NBA.
+RAPTOR Rating represents "Robust Algorithm using Player Tracking and On-off Ratings", a measure of the number of points per 100 possessions that a player contributed to his team, relative to an average NBA player.
+
+Load the dplyr packages
+```{r load-packages, message = FALSE}
+library(dplyr)
+```
+
+Read data from CSV and store on Dataframe ps
+```{r Read data from CSV}
+theUrl <- "https://projects.fivethirtyeight.com/nba-model/2020/latest_RAPTOR_by_team.csv"
+ps <- read.table(file=theUrl, header=TRUE, sep=",", quote = "")
+```
+
+Create subset ps1000 from ps for minutes played more than and equal to 1009 minutes. Two columns "poss" and "mp" are also renamed to "possessions_play" and "minutes_play". The dataframe ps1000 is also previewed.
+```{r Create a subset for playing minutes larger than and equal to 1000}
+ps1000 <- subset(ps, mp >= 1000)
+ps1000 <- ps1000 %>% rename(possessions_play = poss, minutes_play = mp)
+head(ps1000)
+```
+
+The next step can be some graphical and statistical analysis on the data. The goal for this exercise on the dataset is to find out who are the best players in NBA in 2019-2020 seasons according to the "Raptor measurements". As I am a fan of Fantasy Basketball of Yahoo, the data gives me some insights on player's performance.
